@@ -1,18 +1,20 @@
+from typing import Any
+
 import pytest
 
 
 @pytest.fixture
-def scheme_lists():
+def scheme_lists() -> str:
     return "73654108430135874305"
 
 
 @pytest.fixture
-def scheme_lists_2():
+def scheme_lists_2() -> str:
     return "736541084301358743050203405"
 
 
 @pytest.fixture
-def test_lists_3():
+def test_lists_3() -> list[dict[str, Any]]:
     return [
         {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
         {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
@@ -22,7 +24,7 @@ def test_lists_3():
 
 
 @pytest.fixture
-def test_lists_4():
+def test_lists_4() -> list[dict[str, Any]]:
     return [
         {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
         {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
