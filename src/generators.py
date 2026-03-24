@@ -17,6 +17,15 @@ def transaction_descriptions(transactions: list[dict[str, Any]]) -> Generator[An
         yield description
 
 
+def card_number_generator(start: int, stop: int) -> Generator[str, None, None]:
+    if start < stop:
+        for num in range(start, stop + 1):
+            numbers = str(num).zfill(16)
+            num_card = numbers[:4] + " " + numbers[4:8] + " " + numbers[8:12] + " " + numbers[12:]
+            yield num_card
+    else:
+        yield "Начальное значение должно быть меньше конечного"
+
 
 if __name__ == "__main__":
     currency_list = [
@@ -39,14 +48,19 @@ if __name__ == "__main__":
             "to": "Счет 75651667383060284188",
         }
     ]
+    # cc = card_number_generator(9,13)
+    # print(next(cc))
+    # print(next(cc))
+    # print(next(cc))
+    # print(next(card_number_generator(9, 11)))
     # print(next(filter_by_currency(currency_list, "USD")))
     # print(next(transaction_descriptions(currency_list)))
     # # print(next(transaction_descriptions(filter_by_currency(currency_list, "USD"))))
     # print(next(transaction_descriptions(currency_list)))
     # print(next(transaction_descriptions(currency_list)))
-    aa = transaction_descriptions(currency_list)
-    bb = filter_by_currency(currency_list, given_currency="USD")
-    print(next(bb))
-    print(next(bb))
-    print(next(aa))
-    print(next(aa))
+    # aa = transaction_descriptions(currency_list)
+    # bb = filter_by_currency(currency_list, given_currency="USD")
+    # print(next(bb))
+    # print(next(bb))
+    # print(next(aa))
+    # print(next(aa))
