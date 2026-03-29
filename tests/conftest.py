@@ -74,8 +74,12 @@ def test_lists_6() -> list[dict[str, Any]]:
 
 @pytest.fixture
 def test_log():
-    return 'запуск my_function\nmy_function ok\n'
+    return "запуск my_function\nmy_function ok\n"
+
 
 @pytest.fixture
 def test_log_2():
-    return "запуск my_function\nmy_function error: TypeError unsupported operand type(s) for +: 'int' and 'str'. Inputs: (1, '2'), {}.\n"
+    return (
+        "запуск my_function\nmy_function error: "
+        "TypeError unsupported operand type(s) for +: 'int' and 'str'. Inputs: (1, '2'), {}.\n"
+    )
