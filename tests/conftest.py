@@ -70,3 +70,12 @@ def test_lists_6() -> list[dict[str, Any]]:
             "to": "Счет 11776614605963066702",
         }
     ]
+
+
+@pytest.fixture
+def test_log():
+    return 'запуск my_function\nmy_function ok\n'
+
+@pytest.fixture
+def test_log_2():
+    return "запуск my_function\nmy_function error: TypeError unsupported operand type(s) for +: 'int' and 'str'. Inputs: (1, '2'), {}.\n"
