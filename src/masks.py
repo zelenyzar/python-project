@@ -17,7 +17,7 @@ def get_mask_card_number(numbers_card: Union[str]) -> Union[str]:
 
 
 def get_mask_account(numbers_account: Union[str]) -> Union[str]:
-    """Функция, маскирующая номер карты"""
+    """Функция, маскирующая номер счета"""
     new_numbers_account = []
     for num in range(len(numbers_account)):
         if 14 <= num <= 15:
