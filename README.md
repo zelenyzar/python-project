@@ -21,7 +21,7 @@
 18. Функция фильтрации по статусу
 
 ## Установка:
-1. Клонируйте репозиторий
+1. Клонируйте репозиторий:
 (`git clone`) [GitHub] (https://github.com/zelenyzar/python-project)
 2. Установите зависимости
 (`pip requirements.txt`)
