@@ -22,15 +22,32 @@ def read_json(filename: str) -> list[dict[str:Any]]:
         with open(filename, "r", encoding="utf-8") as f:
             transaction_list = json.load(f)
             logger.debug("Получены данные из файла")
+        new_transaction_list = []
         if len(transaction_list) == 0:
             logger.warning("Файл должен содержать данные")
             return []
         elif not isinstance(transaction_list, list):
             logger.warning("Файл не содержит список")
             return []
-        elif len(transaction_list) > 0:
+        for transaction in transaction_list:
+            amount = transaction.get("operationAmount").get("amount")
+            currency_name = transaction.get("operationAmount").get("currency").get("name")
+            currency_code = transaction.get("operationAmount").get("currency").get("code")
+            new_transaction_list.append(
+                {
+                    "id": transaction.get("id"),
+                    "date": transaction.get("date"),
+                    "amount": amount,
+                    "currency_code": currency_code,
+                    "currency_name": currency_name,
+                    "from": transaction.get("from"),
+                    "to": transaction.get("to"),
+                    "description": transaction.get("description"),
+                }
+            )
+        if len(new_transaction_list) > 0:
             logger.info("Получен список транзакций")
-            return transaction_list
+            return new_transaction_list
     except FileNotFoundError as e:
         logger.error(f"Произошла ошибка: {e}")
         return []
@@ -48,7 +65,8 @@ def currency_transaction(transaction_given: dict[str:Any]) -> float:
         logger.info("Сумма конвертирована в рубли")
         return result_sum
 
-def search_word(transaction_list: list[dict[str:Any]],key_word: str) -> list[dict[str:Any]]:
+
+def search_word(transaction_list: list[dict[str:Any]], key_word: str) -> list[dict[str:Any]]:
     """Поиск транзакций по ключевому слову"""
     result_list = []
     if key_word == "" or key_word == " ":
@@ -62,7 +80,8 @@ def search_word(transaction_list: list[dict[str:Any]],key_word: str) -> list[dic
             print("Операции не найдены")
     return result_list
 
-def filter_state(transaction_list: list[dict[str:Any]]) -> dict[str:int|float]:
+
+def filter_state(transaction_list: list[dict[str:Any]]) -> dict[str : int | float]:
     """Функция фильтрации по статусу"""
     result_list = dict(Counter([i["state"] for i in transaction_list]))
     return result_list

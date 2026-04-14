@@ -111,6 +111,32 @@ def test_read():
 
 
 @pytest.fixture
+def test_test_read():
+    return [
+        {
+            "amount": "31957.58",
+            "currency_code": "RUB",
+            "currency_name": "руб.",
+            "date": "2019-08-26T10:50:58.294041",
+            "description": "Перевод организации",
+            "from": "Maestro 1596837868705199",
+            "id": 441945886,
+            "to": "Счет 64686473678894779589",
+        },
+        {
+            "amount": "8221.37",
+            "currency_code": "USD",
+            "currency_name": "USD",
+            "date": "2019-07-03T18:35:29.512364",
+            "description": "Перевод организации",
+            "from": "MasterCard 7158300734726758",
+            "id": 41428829,
+            "to": "Счет 35383033474447895560",
+        },
+    ]
+
+
+@pytest.fixture
 def test_read_1():
     return {
         "id": 441945886,
@@ -275,5 +301,33 @@ def test_xlsx_result():
             "Категория": "Бонусы",
             "Описание": "КЭШбэк",
             "Сумма операции": 800,
+        },
+    ]
+
+
+@pytest.fixture
+def test_search_word():
+    return [
+        {
+            "amount": "16210",
+            "currency_code": "PEN",
+            "currency_name": "Sol",
+            "date": "2023-09-05T11:30:32Z",
+            "description": "Перевод организации",
+            "from": "Счет 58803664561298323391",
+            "id": "650703",
+            "state": "EXECUTED",
+            "to": "Счет 39745660563456619397",
+        },
+        {
+            "amount": "29740",
+            "currency_code": "COP",
+            "currency_name": "Peso",
+            "date": "2020-12-06T23:00:58Z",
+            "description": "Перевод с карты на карту",
+            "from": "Discover 3172601889670065",
+            "id": "3598919",
+            "state": "EXECUTED",
+            "to": "Discover 0720428384694643",
         },
     ]
