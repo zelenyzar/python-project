@@ -1,12 +1,16 @@
 import json
 import logging
+import os
+import re
+from collections import Counter
 from typing import Any
 
 from src.external_api import exchange_data
 
 logger = logging.getLogger("utils")
 logger.setLevel(logging.DEBUG)
-console_handler = logging.FileHandler("logs/utils.log", mode="w", encoding="utf-8")
+path_name = os.path.join(os.path.dirname(__file__), "..", "logs", "utils.log")
+console_handler = logging.FileHandler(path_name, mode="w", encoding="utf-8")
 console_formatter = logging.Formatter("%(asctime)s %(levelname)s %(name)s %(lineno)d: %(message)s")
 console_handler.setFormatter(console_formatter)
 logger.addHandler(console_handler)
@@ -43,3 +47,22 @@ def currency_transaction(transaction_given: dict[str:Any]) -> float:
         result_sum = exchange_data(currency_code, currency_amount)
         logger.info("Сумма конвертирована в рубли")
         return result_sum
+
+def search_word(transaction_list: list[dict[str:Any]],key_word: str) -> list[dict[str:Any]]:
+    """Поиск транзакций по ключевому слову"""
+    result_list = []
+    if key_word == "" or key_word == " ":
+        print("Вы не задали слово")
+    else:
+        pattern = re.compile(rf"{key_word}", re.IGNORECASE)
+        for transaction in transaction_list:
+            if pattern.search(transaction.get("description")):
+                result_list.append(transaction)
+        if len(result_list) == 0:
+            print("Операции не найдены")
+    return result_list
+
+def filter_state(transaction_list: list[dict[str:Any]]) -> dict[str:int|float]:
+    """Функция фильтрации по статусу"""
+    result_list = dict(Counter([i["state"] for i in transaction_list]))
+    return result_list
