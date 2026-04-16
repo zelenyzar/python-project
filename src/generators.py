@@ -3,11 +3,10 @@ from typing import Any, Generator, Iterator
 
 def filter_by_currency(transactions: list[dict[str, Any]], given_currency: str) -> Iterator:
     """Фунцкия, которая итератор, который поочередно возвращает транзакции с заданной валютой"""
-    list_currency = []
+    # list_currency = []
     for transaction in transactions:
-        if transaction["operationAmount"]["currency"]["code"] == given_currency:
-            list_currency.append(transaction)
-            yield list_currency
+        if transaction["currency_code"] == given_currency:
+            yield transaction
 
 
 def transaction_descriptions(transactions: list[dict[str, Any]]) -> Generator[Any, Any, None]:

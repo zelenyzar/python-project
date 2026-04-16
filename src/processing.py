@@ -5,7 +5,7 @@ def filter_by_state(list_dict: list[dict[str, Any]], state: str = "EXECUTED") ->
     """Функция, которая фильтрует по статусу"""
     list_dict_new = []
     for dict_meaning in list_dict:
-        if dict_meaning["state"] == state:
+        if dict_meaning.get("state") == state:
             list_dict_new.append(dict_meaning)
     return list_dict_new
 

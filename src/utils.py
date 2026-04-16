@@ -30,9 +30,9 @@ def read_json(filename: str) -> list[dict[str:Any]]:
             logger.warning("Файл не содержит список")
             return []
         for transaction in transaction_list:
-            amount = transaction.get("operationAmount").get("amount")
-            currency_name = transaction.get("operationAmount").get("currency").get("name")
-            currency_code = transaction.get("operationAmount").get("currency").get("code")
+            amount = transaction.get("operationAmount", {}).get("amount")
+            currency_name = transaction.get("operationAmount", {}).get("currency", {}).get("name")
+            currency_code = transaction.get("operationAmount", {}).get("currency", {}).get("code")
             new_transaction_list.append(
                 {
                     "id": transaction.get("id"),
@@ -74,7 +74,7 @@ def search_word(transaction_list: list[dict[str:Any]], key_word: str) -> list[di
     else:
         pattern = re.compile(rf"{key_word}", re.IGNORECASE)
         for transaction in transaction_list:
-            if pattern.search(transaction.get("description")):
+            if pattern.search(transaction.get("description", "")):
                 result_list.append(transaction)
         if len(result_list) == 0:
             print("Операции не найдены")

@@ -22,9 +22,3 @@ def exchange_data(amount_given: int | float, currency_given: str) -> float:
     # status_code = response.status_code
     # return response.json()
     # , status_code)
-
-
-if __name__ == "__main__":
-    print(exchange_data(1, "USD"))
-
-    # result = response.json().get('result')

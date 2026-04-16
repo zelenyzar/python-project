@@ -6,13 +6,13 @@ from src.generators import card_number_generator, filter_by_currency, transactio
 
 
 def test_filter_by_currency(test_lists_5: list[dict[str, Any]], test_lists_6: list[dict[str, Any]]) -> None:
-    assert next(filter_by_currency(test_lists_5, "USD")) == test_lists_6
+    assert next(filter_by_currency(test_lists_5, "RUB")) == test_lists_6
 
 
 def test_transaction_descriptions(test_lists_5: list[dict[str, Any]]) -> None:
     test_gen = transaction_descriptions(test_lists_5)
     assert next(test_gen) == "Перевод организации"
-    assert next(test_gen) == "Перевод со счета на счет"
+    assert next(test_gen) == "Перевод с карты на карту"
 
 
 def test_card_number_generator_1() -> None:
