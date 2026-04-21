@@ -36,6 +36,7 @@ def read_json(filename: str) -> list[dict[str:Any]]:
             new_transaction_list.append(
                 {
                     "id": transaction.get("id"),
+                    "state": transaction.get("state"),
                     "date": transaction.get("date"),
                     "amount": amount,
                     "currency_code": currency_code,

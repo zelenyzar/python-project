@@ -74,13 +74,14 @@ def main():
         print("Распечатываю итоговый список транзакций...")
         print(f"Всего банковских операций в выборке: {len(transaction)}")
         for i in transaction:
+            print(i)
             date_inf = get_date(i.get("date"))
             description_inf = i.get("description")
-            oper_from = mask_account_card(i.get("from", ""))
+            oper_from = i.get("from", "")
             oper_to = mask_account_card(i.get("to", ""))
             amount_inf = i.get("amount")
             inf_1 = f"{date_inf} {description_inf}"
-            inf_2 = oper_from if oper_from else "" + "->"
+            inf_2 = mask_account_card(oper_from) if oper_from else "" + "->"
             inf_3 = f"{oper_to}"
             inf_4 = f'Сумма: {amount_inf} {i.get("currency_name")}'
             print(f"{inf_1}\n{inf_2} {inf_3}\n{inf_4}\n\n")

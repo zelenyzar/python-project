@@ -21,6 +21,7 @@ def read_xlsx(filename: str) -> list[dict[str:Any]]:
     """Функция чтения exсel-файла"""
     try:
         df_transactions = pd.read_excel(filename)
+        df_transactions = df_transactions.fillna("")
         dict_transactions = df_transactions.to_dict(orient="records")
         return dict_transactions
     except FileNotFoundError:
